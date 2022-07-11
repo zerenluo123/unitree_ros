@@ -10,73 +10,95 @@
 
     <!-- simulate a body pose sensor -->
     <gazebo>
-        <plugin name="p3d" filename="libgazebo_ros_p3d.so">
+        <plugin name="p3d_body" filename="libgazebo_ros_p3d.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>100.0</updateRate>
         <bodyName>base</bodyName>
         <topicName>body_pose_ground_truth</topicName>
         <frameName>world</frameName>
-        <xyzOffsets>0 0 0.0</xyzOffsets>
-        <rpyOffsets>0 0 0.0</rpyOffsets>
         </plugin>
     </gazebo>
 
-    <gazebo>
+    <!-- <gazebo>
         <plugin name="p3d" filename="libgazebo_ros_p3d.so">
-            <always_on>true</always_on>
-            <update_rate>200</update_rate>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>100.0</updateRate>
             <bodyName>base</bodyName>
-            <topicName>/torso_odom</topicName>
+            <topicName>torso_odom</topicName>
             <frameName>world</frameName>
-            <xyzOffset>0 0 0</xyzOffset>
-            <rpyOffset>0 0 0</rpyOffset>
         </plugin>
-    </gazebo>
+    </gazebo> -->
 
     <!-- Show foot position  -->
-
+    <!-- problem: p3d_FL_foot_controller and other sensors are not working, although we set bodyName be FL_foot_imu_link, it measures FL_calf
+         solution: gazebo supress fixed joint by default, then FL_foot and FL_foot_imu_link won't show in gazebo hence p3d cannot find them 
+             so we need following preserveFixedJoint settings to make sure FL_foot and FL_foot_imu_link do not get supressed  -->
+    <gazebo reference="FL_foot_fixed">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="FL_imu_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="FR_foot_fixed">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="FR_imu_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="RL_foot_fixed">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="RL_imu_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="RR_foot_fixed">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference="RR_imu_joint">
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
     <gazebo>
-        <plugin name="p3d" filename="libgazebo_ros_p3d.so">
-            <always_on>true</always_on>
-            <update_rate>200</update_rate>
-            <bodyName>FL_foot_imu_link</bodyName>
-            <topicName>/FL_foot_odom</topicName>
-            <frameName>world</frameName>
-            <xyzOffset>0 0 0</xyzOffset>
-            <rpyOffset>0 0 0</rpyOffset>
+        <plugin name="p3d_fl_foot" filename="libgazebo_ros_p3d.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>100.0</updateRate>
+          <bodyName>FL_foot_imu_link</bodyName>
+          <topicName>FL_foot_odom</topicName>
+          <frameName>world</frameName>
         </plugin>
     </gazebo>
     <gazebo>
-        <plugin name="p3d" filename="libgazebo_ros_p3d.so">
-            <always_on>true</always_on>
-            <update_rate>200</update_rate>
+        <plugin name="p3d_fr_foot" filename="libgazebo_ros_p3d.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>100.0</updateRate>
             <bodyName>FR_foot_imu_link</bodyName>
-            <topicName>/FR_foot_odom</topicName>
+            <topicName>FR_foot_odom</topicName>
             <frameName>world</frameName>
-            <xyzOffset>0 0 0</xyzOffset>
-            <rpyOffset>0 0 0</rpyOffset>
         </plugin>
     </gazebo>
     <gazebo>
-        <plugin name="p3d" filename="libgazebo_ros_p3d.so">
-            <always_on>true</always_on>
-            <update_rate>200</update_rate>
+        <plugin name="p3d_rl_foot" filename="libgazebo_ros_p3d.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>100.0</updateRate>
             <bodyName>RL_foot_imu_link</bodyName>
-            <topicName>/RL_foot_odom</topicName>
+            <topicName>RL_foot_odom</topicName>
             <frameName>world</frameName>
-            <xyzOffset>0 0 0</xyzOffset>
-            <rpyOffset>0 0 0</rpyOffset>
         </plugin>
     </gazebo>
     <gazebo>
-        <plugin name="p3d" filename="libgazebo_ros_p3d.so">
-            <always_on>true</always_on>
-            <update_rate>200</update_rate>
+        <plugin name="p3d_rr_foot" filename="libgazebo_ros_p3d.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>100.0</updateRate>
             <bodyName>RR_foot_imu_link</bodyName>
-            <topicName>/RR_foot_odom</topicName>
+            <topicName>RR_foot_odom</topicName>
             <frameName>world</frameName>
-            <xyzOffset>0 0 0</xyzOffset>
-            <rpyOffset>0 0 0</rpyOffset>
         </plugin>
     </gazebo>
 
@@ -94,7 +116,7 @@
         <gravity>true</gravity>
         <sensor name="imu_sensor" type="imu">
             <always_on>true</always_on>
-            <update_rate>400</update_rate>
+            <!-- <updateRate>400</updateRate> -->
             <visualize>true</visualize>
             <topic>__default_topic__</topic>
             <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
@@ -116,7 +138,7 @@
         <gravity>true</gravity>
         <sensor name="FL_foot_imu_sensor" type="imu">
             <always_on>true</always_on>
-            <update_rate>400</update_rate>
+            <!-- <updateRate>400</updateRate> -->
             <visualize>true</visualize>
             <topic>FL_foot_imu</topic>
             <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
@@ -135,7 +157,7 @@
         <gravity>true</gravity>
         <sensor name="FR_foot_imu_sensor" type="imu">
             <always_on>true</always_on>
-            <update_rate>400</update_rate>
+            <!-- <updateRate>400</updateRate> -->
             <visualize>true</visualize>
             <topic>FR_foot_imu</topic>
             <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
@@ -154,7 +176,7 @@
         <gravity>true</gravity>
         <sensor name="RL_foot_imu_sensor" type="imu">
             <always_on>true</always_on>
-            <update_rate>400</update_rate>
+            <!-- <updateRate>400</updateRate> -->
             <visualize>true</visualize>
             <topic>RL_foot_imu</topic>
             <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
@@ -173,7 +195,7 @@
         <gravity>true</gravity>
         <sensor name="RR_foot_imu_sensor" type="imu">
             <always_on>true</always_on>
-            <update_rate>400</update_rate>
+            <!-- <updateRate>400</updateRate> -->
             <visualize>true</visualize>
             <topic>RR_foot_imu</topic>
             <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
@@ -192,7 +214,7 @@
     <!-- Foot contacts. -->
     <gazebo reference="FR_calf">
         <sensor name="FR_foot_contact" type="contact">
-        <update_rate>100</update_rate>
+        <!-- <updateRate>100</updateRate> -->
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
             <collision>FR_calf_fixed_joint_lump__FR_foot_collision_1</collision>
@@ -201,7 +223,7 @@
     </gazebo>
     <gazebo reference="FL_calf">
         <sensor name="FL_foot_contact" type="contact">
-        <update_rate>100</update_rate>
+        <!-- <updateRate>100</updateRate> -->
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
             <collision>FL_calf_fixed_joint_lump__FL_foot_collision_1</collision>
@@ -210,7 +232,7 @@
     </gazebo>
     <gazebo reference="RR_calf">
         <sensor name="RR_foot_contact" type="contact">
-        <update_rate>100</update_rate>
+        <!-- <updateRate>100</updateRate> -->
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
             <collision>RR_calf_fixed_joint_lump__RR_foot_collision_1</collision>
@@ -219,7 +241,7 @@
     </gazebo>
     <gazebo reference="RL_calf">
         <sensor name="RL_foot_contact" type="contact">
-        <update_rate>100</update_rate>
+        <!-- <updateRate>100</updateRate> -->
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
             <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
@@ -276,6 +298,26 @@
     </gazebo>
 
     <gazebo reference="imu_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="FL_foot_imu_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="FR_foot_imu_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="RL_foot_imu_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="RR_foot_imu_link">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <material>Gazebo/Red</material>

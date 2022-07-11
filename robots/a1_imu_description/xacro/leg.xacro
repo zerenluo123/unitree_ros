@@ -142,12 +142,6 @@
             </inertial>
         </link>
 
-        <joint name="${name}_foot_fixed" type="fixed">
-            <origin rpy="0 0 0" xyz="0 0 ${-(calf_length)}"/>
-            <parent link="${name}_calf"/>
-            <child link="${name}_foot"/>
-        </joint>
-
         <link name="${name}_foot">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -180,11 +174,12 @@
         </link>
 
 
-    <joint name="${name}_imu_joint" type="fixed">
-        <parent link="${name}_foot"/>
-        <child link="${name}_foot_imu_link"/>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-    </joint>
+        <joint name="${name}_foot_fixed" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 ${-(calf_length)}"/>
+            <parent link="${name}_calf"/>
+            <child link="${name}_foot"/>
+        </joint>
+
 
     <link name="${name}_foot_imu_link">
         <inertial>
@@ -202,10 +197,23 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size=".001 .001 .001"/>
+                <sphere radius=".0001"/>
             </geometry>
+                <surface>
+                <friction>
+                <ode>
+                    <mu>1.0</mu>
+                    <mu2>1.0</mu2>
+                </ode>
+                </friction>
+            </surface>
         </collision>
     </link>
+    <joint name="${name}_imu_joint" type="fixed">
+        <parent link="${name}_foot"/>
+        <child link="${name}_foot_imu_link"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
 
         <xacro:leg_transmission name="${name}"/>
     </xacro:macro>
