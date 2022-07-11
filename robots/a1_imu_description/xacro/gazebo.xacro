@@ -302,7 +302,7 @@
         <mu2>0.2</mu2>
         <material>Gazebo/Red</material>
     </gazebo>
-    <!-- <gazebo reference="FL_foot_imu_link">
+    <gazebo reference="FL_foot_imu_link">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <material>Gazebo/Red</material>
@@ -321,7 +321,7 @@
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <material>Gazebo/Red</material>
-    </gazebo> -->
+    </gazebo>
 
     <!-- FL leg -->
     <gazebo reference="FL_hip">
