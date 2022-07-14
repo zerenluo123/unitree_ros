@@ -1,6 +1,7 @@
 <launch>
     <arg name="wname" default="earth"/>
     <arg name="rname" default="laikago"/>
+    <arg name="conveyor" default="0"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
 
@@ -70,5 +71,11 @@
 
     <!-- add a low state publisher -->
     <node pkg="unitree_controller" type="unitree_gazebo_low_state_pub" name="gazebo_low_state_pub" output="screen"/>
+
+    <!-- launch conveyor belt -->
+    <group if="$(eval conveyor == 1)">
+        <node ns="conveyor" name="spawn_model_belt" pkg="gazebo_ros" type="spawn_model" args="-file $(find demo_world)/urdf/conveyor.urdf -urdf -model conveyor_belt" respawn="false" output="screen" />
+        <node name="cube_spawner" pkg="demo_world" type="demo.py" output="screen"/>
+    </group>
 
 </launch>
