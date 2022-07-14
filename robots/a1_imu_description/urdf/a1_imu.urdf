@@ -48,15 +48,15 @@
       <frameName>world</frameName>
     </plugin>
   </gazebo>
-  <!-- <gazebo>
-        <plugin name="p3d" filename="libgazebo_ros_p3d.so">
-            <alwaysOn>true</alwaysOn>
-            <updateRate>100.0</updateRate>
-            <bodyName>base</bodyName>
-            <topicName>torso_odom</topicName>
-            <frameName>world</frameName>
-        </plugin>
-    </gazebo> -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="p3d">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <bodyName>base</bodyName>
+      <topicName>torso_odom</topicName>
+      <frameName>world</frameName>
+    </plugin>
+  </gazebo>
   <!-- Show foot position  -->
   <!-- problem: p3d_FL_foot_controller and other sensors are not working, although we set bodyName be FL_foot_imu_link, it measures FL_calf
          solution: gazebo supress fixed joint by default, then FL_foot and FL_foot_imu_link won't show in gazebo hence p3d cannot find them 
@@ -233,39 +233,40 @@
     </sensor>
   </gazebo>
   <!-- Foot contacts. -->
-  <gazebo reference="FR_calf">
+  <gazebo reference="FR_foot">
     <sensor name="FR_foot_contact" type="contact">
-      <!-- <updateRate>100</updateRate> -->
+      <updateRate>100</updateRate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>FR_calf_fixed_joint_lump__FR_foot_collision_1</collision>
+        <collision>FR_foot_collision</collision>
       </contact>
     </sensor>
   </gazebo>
-  <gazebo reference="FL_calf">
+  <gazebo reference="FL_foot">
     <sensor name="FL_foot_contact" type="contact">
-      <!-- <updateRate>100</updateRate> -->
+      <updateRate>100</updateRate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>FL_calf_fixed_joint_lump__FL_foot_collision_1</collision>
+        <!-- this is from the Gazebo GUI -->
+        <collision>FL_foot_collision</collision>
       </contact>
     </sensor>
   </gazebo>
-  <gazebo reference="RR_calf">
+  <gazebo reference="RR_foot">
     <sensor name="RR_foot_contact" type="contact">
-      <!-- <updateRate>100</updateRate> -->
+      <updateRate>100</updateRate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>RR_calf_fixed_joint_lump__RR_foot_collision_1</collision>
+        <collision>RR_foot_collision</collision>
       </contact>
     </sensor>
   </gazebo>
-  <gazebo reference="RL_calf">
+  <gazebo reference="RL_foot">
     <sensor name="RL_foot_contact" type="contact">
-      <!-- <updateRate>100</updateRate> -->
+      <updateRate>100</updateRate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
+        <collision>RL_foot_collision</collision>
       </contact>
     </sensor>
   </gazebo>
@@ -641,27 +642,27 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="red"/>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius=".0001"/>
-      </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
+    <!-- <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".0001"/>
+            </geometry>
+                <surface>
+                <friction>
+                <ode>
+                    <mu>1.0</mu>
+                    <mu2>1.0</mu2>
+                </ode>
+                </friction>
+            </surface>
+        </collision> -->
   </link>
   <joint name="FR_imu_joint" type="fixed">
     <parent link="FR_foot"/>
@@ -834,27 +835,27 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="red"/>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius=".0001"/>
-      </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
+    <!-- <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".0001"/>
+            </geometry>
+                <surface>
+                <friction>
+                <ode>
+                    <mu>1.0</mu>
+                    <mu2>1.0</mu2>
+                </ode>
+                </friction>
+            </surface>
+        </collision> -->
   </link>
   <joint name="FL_imu_joint" type="fixed">
     <parent link="FL_foot"/>
@@ -1027,27 +1028,27 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="red"/>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius=".0001"/>
-      </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
+    <!-- <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".0001"/>
+            </geometry>
+                <surface>
+                <friction>
+                <ode>
+                    <mu>1.0</mu>
+                    <mu2>1.0</mu2>
+                </ode>
+                </friction>
+            </surface>
+        </collision> -->
   </link>
   <joint name="RR_imu_joint" type="fixed">
     <parent link="RR_foot"/>
@@ -1220,27 +1221,27 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="red"/>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius=".0001"/>
-      </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
+    <!-- <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius=".0001"/>
+            </geometry>
+                <surface>
+                <friction>
+                <ode>
+                    <mu>1.0</mu>
+                    <mu2>1.0</mu2>
+                </ode>
+                </friction>
+            </surface>
+        </collision> -->
   </link>
   <joint name="RL_imu_joint" type="fixed">
     <parent link="RL_foot"/>

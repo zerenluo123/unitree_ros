@@ -212,39 +212,40 @@
     </gazebo>
 
     <!-- Foot contacts. -->
-    <gazebo reference="FR_calf">
+    <gazebo reference="FR_foot">
         <sensor name="FR_foot_contact" type="contact">
-        <!-- <updateRate>100</updateRate> -->
+        <updateRate>100</updateRate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>FR_calf_fixed_joint_lump__FR_foot_collision_1</collision>
+            <collision>FR_foot_collision</collision>
         </contact>
         </sensor>
     </gazebo>
-    <gazebo reference="FL_calf">
+    <gazebo reference="FL_foot">
         <sensor name="FL_foot_contact" type="contact">
-        <!-- <updateRate>100</updateRate> -->
+        <updateRate>100</updateRate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>FL_calf_fixed_joint_lump__FL_foot_collision_1</collision>
+        <!-- this is from the Gazebo GUI -->
+            <collision>FL_foot_collision</collision>
         </contact>
         </sensor>
     </gazebo>
-    <gazebo reference="RR_calf">
+    <gazebo reference="RR_foot">
         <sensor name="RR_foot_contact" type="contact">
-        <!-- <updateRate>100</updateRate> -->
+        <updateRate>100</updateRate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>RR_calf_fixed_joint_lump__RR_foot_collision_1</collision>
+            <collision>RR_foot_collision</collision>
         </contact>
         </sensor>
     </gazebo>
-    <gazebo reference="RL_calf">
+    <gazebo reference="RL_foot">
         <sensor name="RL_foot_contact" type="contact">
-        <!-- <updateRate>100</updateRate> -->
+        <updateRate>100</updateRate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
+            <collision>RL_foot_collision</collision>
         </contact>
         </sensor>
     </gazebo>

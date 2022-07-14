@@ -187,7 +187,7 @@
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
         </inertial>
-        <visual>
+        <!-- <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
                 <box size="0.001 0.001 0.001"/>
@@ -207,7 +207,7 @@
                 </ode>
                 </friction>
             </surface>
-        </collision>
+        </collision> -->
     </link>
     <joint name="${name}_imu_joint" type="fixed">
         <parent link="${name}_foot"/>
